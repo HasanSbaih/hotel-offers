@@ -1,16 +1,10 @@
 package com.expedia.exercise.hotel.offers.api.gateway.controllers;
 
 import com.expedia.exercise.hotel.offers.api.gateway.controllers.requests.OfferSearchParameters;
-import com.expedia.exercise.hotel.offers.api.gateway.model.dto.HotelOfferDto;
+import com.expedia.exercise.hotel.offers.api.gateway.controllers.requests.OfferSearchResponse;
 import com.expedia.exercise.hotel.offers.api.gateway.model.search.SearchForAnOffer;
 import com.expedia.exercise.hotel.offers.api.gateway.ports.ApplicationContext;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by u562 on 3/1/2017.
@@ -18,13 +12,23 @@ import java.util.List;
 @RestController
 public class SearchController {
 
+    @CrossOrigin
     @RequestMapping(name = "/search", method = RequestMethod.POST)
-    public List<HotelOfferDto> search(@RequestBody OfferSearchParameters offerSearchParams) {
-        final List<HotelOfferDto> offersToView = new ArrayList<>();
+    public OfferSearchResponse search(@RequestBody OfferSearchParameters offerSearchParams) {
+        final OfferSearchResponse response = new OfferSearchResponse();
 
-        new SearchForAnOffer(new ApplicationContext()).execute(offerSearchParams, offer -> offersToView.add(offer) );
+        new SearchForAnOffer(new ApplicationContext()).execute(offerSearchParams, offer -> response.getOffers().add(offer) );
 
-        return offersToView;
+        return response;
+    }
+    @CrossOrigin
+    @RequestMapping(name = "/search", method = RequestMethod.GET )
+    public OfferSearchResponse getAllData() {
+        final OfferSearchResponse response = new OfferSearchResponse();
+
+        new SearchForAnOffer(new ApplicationContext()).execute(new OfferSearchParameters(), offer -> response.getOffers().add(offer) );
+
+        return response;
     }
 
 }
