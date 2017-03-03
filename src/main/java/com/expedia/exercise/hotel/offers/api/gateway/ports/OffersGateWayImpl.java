@@ -47,25 +47,40 @@ public class OffersGateWayImpl implements OffersGateWay {
     }
 
     private URI buildServiceLocationAndRequestParams(SearchRequest request) {
+        UriComponentsBuilder uriBuilder = buildInitialUrlAndApiToken();
+
+        addUrlParameters(request, uriBuilder);
+        return uriBuilder.build().toUri();
+    }
+
+    private void addUrlParameters(SearchRequest request, UriComponentsBuilder uriBuilder) {
+        addParam(uriBuilder,"destinationCity", request.getDestinationCity());
+        addParam(uriBuilder,"destinationName", request.getDestinationName());
+        addParam(uriBuilder,"regionIds", request.getRegionIds());
+        addParam(uriBuilder,"minTripStartDate", request.getMinTripStartDate());
+        addParam(uriBuilder,"maxTripStartDate", request.getMaxTripStartDate());
+        addParam(uriBuilder,"lengthOfStay", request.getLengthOfStay());
+        addParam(uriBuilder,"minStarRating", request.getMinStarRating());
+        addParam(uriBuilder,"maxStarRating", request.getMaxStarRating());
+        addParam(uriBuilder,"minGuestRating", request.getMinGuestRating());
+        addParam(uriBuilder,"maxGuestRating", request.getMaxGuestRating());
+        addParam(uriBuilder,"minTotalRate", request.getMinTotalRate());
+        addParam(uriBuilder,"maxTotalRate", request.getMaxTotalRate());
+    }
+
+    void addParam(UriComponentsBuilder uriBuilder ,String key,Object value){
+        if (value==null)
+            return;
+        uriBuilder.queryParam(key, value);
+    }
+
+    private UriComponentsBuilder buildInitialUrlAndApiToken() {
         return UriComponentsBuilder.fromUriString(SERVICE_URL)
-                        .path(SERVICE_PATH)
-                        .queryParam("scenario","deal-finder")
-                        .queryParam("page","foo")
-                        .queryParam("uid","foo")
-                        .queryParam("productType","Hotel")
-                        .queryParam("destinationCity",request.getDestinationCity())
-                        .queryParam("destinationName",request.getDestinationName())
-                        .queryParam("regionIds",request.getRegionIds())
-                        .queryParam("minTripStartDate",request.getMinTripStartDate())
-                        .queryParam("maxTripStartDate",request.getMaxTripStartDate())
-                        .queryParam("lengthOfStay",request.getLengthOfStay())
-                        .queryParam("minStarRating",request.getMinStarRating())
-                        .queryParam("maxStarRating",request.getMaxStarRating())
-                        .queryParam("minGuestRating",request.getMinGuestRating())
-                        .queryParam("maxGuestRating",request.getMaxGuestRating())
-                        .queryParam("minTotalRate",request.getMinTotalRate())
-                        .queryParam("maxTotalRate",request.getMaxTotalRate())
-                        .build().toUri();
+                .path(SERVICE_PATH)
+                .queryParam("scenario", "deal-finder")
+                .queryParam("page", "foo")
+                .queryParam("uid", "foo")
+                .queryParam("productType", "Hotel");
     }
 
     public RestTemplate getRestTemplate() {
