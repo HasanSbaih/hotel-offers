@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by u562 on 3/1/2017.
  */
+@CrossOrigin
 @RestController
 public class SearchController {
 
