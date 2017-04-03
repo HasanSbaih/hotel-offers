@@ -7,7 +7,7 @@ and I have used Spring boot to present the wanted data as a rest api .
 
 #Building from Source
 
-I have use maven as build tool , you have only to call 
+call 
 $ ./mvn clean install
 to build the binaries .
 
