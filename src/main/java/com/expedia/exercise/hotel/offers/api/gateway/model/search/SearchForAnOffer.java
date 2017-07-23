@@ -1,16 +1,14 @@
 package com.expedia.exercise.hotel.offers.api.gateway.model.search;
 
 import com.expedia.exercise.development.UseCase;
-import com.expedia.exercise.hotel.offers.api.gateway.model.Context;
+import com.expedia.exercise.hotel.offers.api.gateway.model.SearchUseCaseContext;
 
-/**
- * Created by u562 on 3/1/2017.
- */
+
 public class SearchForAnOffer implements UseCase<SearchRequest,SearchResponse> {
 
-    private final Context context;
+    private final SearchUseCaseContext context;
 
-    public SearchForAnOffer(Context context) {
+    public SearchForAnOffer(SearchUseCaseContext context) {
         this.context = context;
     }
 

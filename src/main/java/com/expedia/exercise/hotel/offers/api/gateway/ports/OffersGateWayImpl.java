@@ -6,6 +6,7 @@ import com.expedia.exercise.hotel.offers.api.gateway.model.search.SearchRequest;
 import com.expedia.exercise.hotel.offers.api.gateway.ports.pojos.Hotel;
 import com.expedia.exercise.hotel.offers.api.gateway.ports.pojos.OffersRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 

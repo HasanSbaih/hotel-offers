@@ -2,31 +2,29 @@ package com.expedia.exercise.hotel.offers.api.gateway.model.search;
 
 import com.expedia.exercise.development.Request;
 
-/**
- * Created by u562 on 3/1/2017.
- */
+
 public interface SearchRequest extends Request {
-    public String getDestinationName();
+    String getDestinationName();
 
-    public String getDestinationCity();
+    String getDestinationCity();
 
-    public String getRegionIds();
+    String getRegionIds();
 
-    public String getMinTripStartDate();
+    String getMinTripStartDate();
 
-    public String getMaxTripStartDate();
+    String getMaxTripStartDate();
 
-    public String getLengthOfStay();
+    String getLengthOfStay();
 
-    public String getMinStarRating();
+    String getMinStarRating();
 
-    public String getMaxStarRating();
+    String getMaxStarRating();
 
-    public String getMinGuestRating();
+    String getMinGuestRating();
 
-    public String getMaxGuestRating();
+    String getMaxGuestRating();
 
-    public String getMinTotalRate();
+    String getMinTotalRate();
 
-    public String getMaxTotalRate();
+    String getMaxTotalRate();
 }

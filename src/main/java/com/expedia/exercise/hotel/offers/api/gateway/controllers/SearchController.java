@@ -2,23 +2,25 @@ package com.expedia.exercise.hotel.offers.api.gateway.controllers;
 
 import com.expedia.exercise.hotel.offers.api.gateway.controllers.requests.OfferSearchParameters;
 import com.expedia.exercise.hotel.offers.api.gateway.controllers.requests.OfferSearchResponse;
+import com.expedia.exercise.hotel.offers.api.gateway.model.SearchUseCaseContext;
 import com.expedia.exercise.hotel.offers.api.gateway.model.search.SearchForAnOffer;
-import com.expedia.exercise.hotel.offers.api.gateway.ports.ApplicationContext;
+import com.expedia.exercise.hotel.offers.api.gateway.ports.ApplicationSearchUseCaseContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by u562 on 3/1/2017.
- */
+
 @CrossOrigin
 @RestController
 public class SearchController {
+    @Autowired
+    private SearchUseCaseContext context ;
 
     @CrossOrigin
     @RequestMapping(name = "/search", method = RequestMethod.POST)
     public OfferSearchResponse search(@RequestBody OfferSearchParameters offerSearchParams) {
         final OfferSearchResponse response = new OfferSearchResponse();
 
-        new SearchForAnOffer(new ApplicationContext()).execute(offerSearchParams, offer -> response.getOffers().add(offer) );
+        new SearchForAnOffer(context).execute(offerSearchParams, offer -> response.getOffers().add(offer) );
 
         return response;
     }
@@ -27,7 +29,7 @@ public class SearchController {
     public OfferSearchResponse getAllData() {
         final OfferSearchResponse response = new OfferSearchResponse();
 
-        new SearchForAnOffer(new ApplicationContext()).execute(new OfferSearchParameters(), offer -> response.getOffers().add(offer) );
+        new SearchForAnOffer(context).execute(new OfferSearchParameters(), offer -> response.getOffers().add(offer) );
 
         return response;
     }

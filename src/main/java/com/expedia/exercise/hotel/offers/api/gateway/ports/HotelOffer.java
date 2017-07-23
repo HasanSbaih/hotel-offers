@@ -2,9 +2,6 @@ package com.expedia.exercise.hotel.offers.api.gateway.ports;
 
 import com.expedia.exercise.hotel.offers.api.gateway.model.dto.HotelOfferDto;
 
-/**
- * Created by u562 on 3/3/2017.
- */
 public class HotelOffer implements HotelOfferDto{
     private String name;
     private String cityName;
